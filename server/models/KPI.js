@@ -6,19 +6,19 @@ loadType(mongoose);
 
 const daySchema = new Schema(
     {
-        date: String,
-        revenue: {
-          type: mongoose.Types.Currency,
-          currency: "USD",
-          get: (v) => v/ 100        
-        },
-        expenses: {
-          type: mongoose.Types.Currency,
-          currency: "USD",
-          get: (v) => v/ 100        
-        },
+      date: String,
+      revenue: {
+        type: mongoose.Types.Currency,
+        currency: "USD",
+        get: (v) => v/ 100        
       },
-      { toJSON: { getters: true} }    
+      expenses: {
+        type: mongoose.Types.Currency,
+        currency: "USD",
+        get: (v) => v/ 100        
+      }
+    },
+    { toJSON: { getters: true} }    
 )
 
 const monthSchema = new Schema(
@@ -43,7 +43,7 @@ const monthSchema = new Schema(
         type: mongoose.Types.Currency,
         currency: "USD",
         get: (v) => v/ 100        
-      },
+      }
     },
     { toJSON: { getters: true} }
 )
@@ -68,7 +68,7 @@ const KPISchema = new Schema(
     expensesByCategory: {
         type: Map,
         of: {
-            type: mongoose.Types.Curnecy,
+            type: mongoose.Types.Currency,
             currency: "USD",
             get: (v) => v / 100
         }
@@ -76,7 +76,7 @@ const KPISchema = new Schema(
     monthlyData: [monthSchema],
     dailyData: [daySchema],
   },
-  { timestamps: true, toJSON: { getters: true} }
+  { timestamps: true, toJSON: { getters: true } }
 );
 
 const KPI = mongoose.model("KPI", KPISchema);
